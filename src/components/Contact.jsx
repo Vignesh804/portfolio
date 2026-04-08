@@ -19,7 +19,10 @@ function Contact({ profile }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (!canSubmit) return;
+    if (!canSubmit) {
+      setStatus({ state: 'error', message: 'Please enter a valid name, email, and a message (min 10 characters).' });
+      return;
+    }
 
     if (!email) {
       setStatus({ state: 'error', message: 'No email configured for this site.' });
@@ -90,6 +93,7 @@ function Contact({ profile }) {
               <span className="fieldLabel">Email</span>
               <input
                 className="input"
+                type="email"
                 value={form.email}
                 onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
                 placeholder="you@email.com"
@@ -104,6 +108,7 @@ function Contact({ profile }) {
               <textarea
                 className="textarea"
                 rows={6}
+                minLength={10}
                 value={form.message}
                 onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
                 placeholder="Tell me about your project…"
@@ -112,8 +117,8 @@ function Contact({ profile }) {
             </label>
 
             <div className="formRow">
-              <button className="btn btnPrimary" type="submit" disabled={!canSubmit || status.state === 'loading'}>
-                {status.state === 'loading' ? 'Sending…' : 'Send Message'}
+              <button className="btn btnPrimary" type="submit" disabled={status.state === 'loading'}>
+                {status.state === 'loading' ? 'Sending…' : 'Send via Email'}
               </button>
               <p className={status.state === 'success' ? 'formNote isSuccess' : status.state === 'error' ? 'formNote isError' : 'formNote'}>
                 {status.message}

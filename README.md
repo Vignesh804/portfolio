@@ -16,3 +16,11 @@ Premium, colorful portfolio built from your resume content.
 ## Contact form
 
 The contact form opens an email draft (`mailto:`) using the Email in `src/content/profile.js` (no backend required).
+
+## Deploy (GitHub Pages)
+
+Recommended: GitHub Actions.
+
+- Repo Settings → Pages → Source: `GitHub Actions`
+- Push to `main` (workflow builds and deploys `dist/`)
+- Site URL: `https://vignesh804.github.io/portfolio/`
